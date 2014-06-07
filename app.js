@@ -28,7 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.locals.pretty = true
 
 app.use(less(path.join(__dirname, 'public/stylesheets', 'less'), {
-    paths   : [ path.join(bootstrapPath, 'less') ],
+    parser: {
+        paths   : [ path.join(bootstrapPath, 'less') ],
+    },
     dest    : path.join(__dirname, 'public', 'stylesheets'),
     prefix  : '/stylesheets',
     debug   : true
