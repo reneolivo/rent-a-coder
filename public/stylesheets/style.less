@@ -1,9 +1,27 @@
 @import '../bower_components/bootstrap/less/bootstrap';
+@import './colours';
 
 body {
-  padding: 20px;
+	margin: 0;
+	padding: 0;
 }
 
-a {
-  color: #00B7FF;
+#wrapper {
+	.row();
+}
+
+#main-header {
+	.make-md-column( 3 );
+
+	padding-left: 30px;
+	color: white;
+	background: @dark-orange;
+
+	.intro {
+		font-size: 80%;
+	}
+}
+
+#content {
+	.make-md-column( 9 );
 }

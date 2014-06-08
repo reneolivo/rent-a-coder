@@ -5,9 +5,15 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body
-		#wrapper.container
-			header#main-header.row
-				h1 Rent a Coder
+		#wrapper
+			header#main-header
+				.logo
+					h1 Rent a Coder
+					p.slogan Lorem ipsum dolor sit amet.
+
+				.intro
+					p
+						| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet nibh nunc. Nulla eleifend, lorem ut sodales interdum, ipsum turpis sodales lectus, eget rutrum orci ligula ac urna. 
 		
-			section#content.row
+			section#content
 				block content
