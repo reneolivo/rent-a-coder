@@ -15,7 +15,17 @@ router.get('/', function(req, res) {
 
 /* GET coder details. */
 function coder_details(req, res) {
-	res.render('coder-details');
+	var id = req.params.id;
+
+	db.findOne({_id: id}, function(err, doc) {
+		if (err) {
+			return res.send(500, err);
+		} else if (doc === null) {
+			return res.send(404, 'Coder Not Found');
+		}
+
+		res.render( 'coder-details', { coder: doc } );
+	});
 }
 
 router.get('/coder/:id', coder_details);

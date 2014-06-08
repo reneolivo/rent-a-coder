@@ -10,6 +10,7 @@ var coders		= [
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet nibh nunc. Nulla eleifend, lorem ut sodales interdum, ipsum turpis sodales lectus, eget rutrum orci ligula ac urna.</p>\
 Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo eu rhoncus. Ut iaculis at est id scelerisque. Fusce dignissim mattis arcu ut tincidunt. Donec molestie nunc ut lectus gravida pulvinar.</p>\
 		',
+		price		: 9.99,
 		skills		: [
 			'HTML',
 			'CSS',
@@ -27,6 +28,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -43,6 +45,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -59,6 +62,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -75,6 +79,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -91,6 +96,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -107,6 +113,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -123,6 +130,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',
@@ -139,6 +147,7 @@ Proin 		<p>euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo
 		imagePath	: '',
 		resume		: '',
 		bio			: '',
+		price		: 1,
 		skills		: [
 			'',
 			'',

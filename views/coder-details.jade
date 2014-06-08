@@ -2,33 +2,25 @@ extend layout
 
 block content
 	#coder-details
-		h2 Pearl Stewart
+		h2= coder.name
 
 		.figure
-			img(src="http://api.randomuser.me/portraits/women/53.jpg", alt="coder")
+			img(src="/data/users/" + coder.imagePath, alt="coder")
 
 		.info
-			a.email(href="mailto:pearl.stewart61@example.com")
-				| pearl.stewart61@example.com
+			a.email(href="mailto:" + coder.email)= coder.email
 
-			p.phone
-				| (823)-164-6573
+			p.phone= coder.phone
 
-			address
-				| 3466 Robinson Rd
+			address= coder.address
 
 			.skills
 				p 
-					each skill in ['html','css','less','jade','express','mongodb']
+					each skill in coder.skills
 						span= '#' + skill.toUpperCase()
 						|  
 
-		.details
-			p 
-				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet nibh nunc. Nulla eleifend, lorem ut sodales interdum, ipsum turpis sodales lectus, eget rutrum orci ligula ac urna.
-
-			p
-				| Proin euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo eu rhoncus. Ut iaculis at est id scelerisque. Fusce dignissim mattis arcu ut tincidunt. Donec molestie nunc ut lectus gravida pulvinar.
+		.details!= coder.bio
 
 	form#rent-this-coder(method="post")
 		h3 Rent this coder
@@ -38,7 +30,7 @@ block content
 
 		p.price
 			span.currency USD$
-			span.number 99.99
+			span.number= coder.price
 
 		input(type="email", name="email", placeholder="Your E-Mail")
 
