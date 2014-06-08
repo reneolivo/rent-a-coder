@@ -92,6 +92,13 @@ body {
 
 
 #coder-details {
+	float: left;
+	width: 400px;
+
+	h2 {
+		margin-top: 29px;
+	}
+
 	.figure {
 		width: 400px;
 		height: 150px;
@@ -101,5 +108,85 @@ body {
 		img {
 			margin-top: -150px;
 		}
+	}
+
+	.info,
+	.details {
+		float: left;
+		width: 50%;
+		font-size: smaller;
+
+		.email {
+			color: @green;
+			font-weight: bold;
+			text-decoration: none;
+		}
+
+		.email:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.info {
+		clear: right;
+		float: right;
+		margin-top: 13.3px;
+
+		.skills {
+			font-size: larger;
+			color: @light-grey;
+
+			span:nth-child(2n) {
+				color: @grey;
+			}
+		}
+	}
+
+	.details {
+		width: 45%;
+		padding-right: 5%;
+	}
+}
+
+#rent-this-coder {
+	float: right;
+	padding-left: 20px;
+	width: 200px;
+
+	h3 {
+		margin-top: 33.5px;
+	}
+
+	.intro {
+		font-size: smaller;
+	}
+
+	.price {
+		.currency {
+			font-size: x-small;
+		}
+
+		.number {
+			font-size: xx-large;
+		}
+	}
+
+	input[type="email"] {
+		padding: 5px;
+		width: 170px;
+		font-size: large;
+		color: @grey;
+	}
+
+	input[type="submit"] {
+		cursor: pointer;
+		margin-left: 104px;
+		width: 80px;
+		color: white;
+		font-weight: bold;
+		font-size: larger;
+		text-transform: uppercase;
+		background: @dark-orange;
+		border: none;
 	}
 }

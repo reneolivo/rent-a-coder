@@ -17,6 +17,12 @@ block content
 			address
 				| 3466 Robinson Rd
 
+			.skills
+				p 
+					each skill in ['html','css','less','jade','express','mongodb']
+						span= '#' + skill.toUpperCase()
+						|  
+
 		.details
 			p 
 				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet nibh nunc. Nulla eleifend, lorem ut sodales interdum, ipsum turpis sodales lectus, eget rutrum orci ligula ac urna.
@@ -24,15 +30,16 @@ block content
 			p
 				| Proin euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo eu rhoncus. Ut iaculis at est id scelerisque. Fusce dignissim mattis arcu ut tincidunt. Donec molestie nunc ut lectus gravida pulvinar.
 
-			p
-				| Proin nec eleifend quam. Phasellus purus urna, sodales ac ligula nec, ultricies malesuada lacus. Aliquam ut fringilla erat. Nam hendrerit mi tortor, ut vestibulum libero sagittis vitae.
-
-	form#rent-this-coder
+	form#rent-this-coder(method="post")
 		h3 Rent this coder
 
-		p
+		p.intro
 			| Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-		input(type="email", name="email")
+		p.price
+			span.currency USD$
+			span.number 99.99
+
+		input(type="email", name="email", placeholder="Your E-Mail")
 
 		input(type="submit", value="Rent")

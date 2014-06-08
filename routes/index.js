@@ -6,9 +6,12 @@ router.get('/', function(req, res) {
 	res.render('index');
 });
 
-/* GET home page. */
-router.get('/coder/:id', function(req, res) {
+/* GET coder details. */
+function coder_details(req, res) {
 	res.render('coder-details');
-});
+}
+
+router.get('/coder/:id', coder_details);
+router.post('/coder/:id', coder_details);
 
 module.exports = router;
