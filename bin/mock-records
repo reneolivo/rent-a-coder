@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var async		= require( 'async' );
+var DataStore	= require( 'nedb' );
+
+var records		= require( '../data/mock-data' );
+var config		= require( '../config' );
+
+var db			= new DataStore( { filename: config.DBPATH, autoload: true } );
+
+
+
+var toProcess	= [];
+for(var i in records) {
+	toProcess.push((function(record) {
+		return function(asyncCallback) {
+			db.insert( record, asyncCallback );
+		}
+	})( records[ i ] ));
+}
+
+//DELETES all records
+db.remove({}, { multi: true }, function(err) {
+	if (err) {
+		return console.error( err );
+	}
+
+	//INSERTS mock records
+	async.parallel(toProcess, function(err, result) {
+		if (err) {
+			return console.error( err );
+		}
+
+		console.log( '-mocks installed-' );
+	});
+});
