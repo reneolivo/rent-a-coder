@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
 var async		= require( 'async' );
-var DataStore	= require( 'nedb' );
+var db			= require( '../models/db' );
 
 var records		= require( '../data/mock-data' );
-var config		= require( '../config' );
-
-var db			= new DataStore( { filename: config.DBPATH, autoload: true } );
 
 
 

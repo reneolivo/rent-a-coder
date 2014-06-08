@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+var db		= require( '../models/db' );
+var express	= require( 'express' );
+var router	= express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	res.render('index');
+	db.find({}, function(err, docs) {
+		if (err) {
+			return res.send(500, err);
+		}
+
+		res.render( 'index', { coders: docs } );
+	});
 });
 
 /* GET coder details. */
