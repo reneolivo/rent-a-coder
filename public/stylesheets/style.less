@@ -4,18 +4,19 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: Helvetica;
+	background: url('../images/main-background.png') top left repeat-y;
 }
 
 #wrapper {
+	float: left;
 	width: 990px;
 }
 
 #main-header {
 	float: left;
-	width: 300px;
-	padding-left: 30px;
+	width: 270px;
+	padding: 0 10px 0 30px;
 	color: white;
-	background: @dark-orange;
 
 	.intro {
 		font-size: 80%;
@@ -25,18 +26,66 @@ body {
 #content {
 	float: left;
 	padding-left: 40px;
-	width: 500px;
+	width: 640px;
+
+	#coders .coder {
+		float: left;
+		width: 150px;
+	}
 }
 
 .coder {
+	margin: 0 20px 40px 20px;
+	width: 150px;
+	text-align: center;
+
+	a {
+		float: left;
+		width: 100%;
+		color: @black;
+		text-decoration: none;
+	}
+
 	.figure {
+		margin: 0 auto;
 		width: 100px;
 		height: 100px;
 		border-radius: 100px;
+		border: 5px solid white;
 		overflow: hidden;
+		transition: 0.5s linear;
 
 		img {
 			width: 100px;
+		}
+	}
+
+	h3 {
+		color: @black;
+		transition: 0.5s linear;
+	}
+
+	p {
+		font-size: smaller;
+	}
+
+	.view-more {
+		font-weight: bold;
+		font-size: small;
+		color: @black;
+		transition: 0.5s linear;
+	}
+
+	a:hover {
+		transition: 0.2s linear;
+
+		.figure {
+			border-color: @dark-orange;
+		}
+
+		h3, .view-more {
+			color: @dark-orange;
+			transition: 0.2s linear;
 		}
 	}
 }
