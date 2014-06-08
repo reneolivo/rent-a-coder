@@ -1,0 +1,38 @@
+extend layout
+
+block content
+	#coder-details
+		h2 Pearl Stewart
+
+		.figure
+			img(src="http://api.randomuser.me/portraits/women/53.jpg", alt="coder")
+
+		.info
+			a.email(href="mailto:pearl.stewart61@example.com")
+				| pearl.stewart61@example.com
+
+			p.phone
+				| (823)-164-6573
+
+			address
+				| 3466 Robinson Rd
+
+		.details
+			p 
+				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet nibh nunc. Nulla eleifend, lorem ut sodales interdum, ipsum turpis sodales lectus, eget rutrum orci ligula ac urna.
+
+			p
+				| Proin euismod dui ut mauris egestas tempor nec quis nibh. In aliquam at leo eu rhoncus. Ut iaculis at est id scelerisque. Fusce dignissim mattis arcu ut tincidunt. Donec molestie nunc ut lectus gravida pulvinar.
+
+			p
+				| Proin nec eleifend quam. Phasellus purus urna, sodales ac ligula nec, ultricies malesuada lacus. Aliquam ut fringilla erat. Nam hendrerit mi tortor, ut vestibulum libero sagittis vitae.
+
+	form#rent-this-coder
+		h3 Rent this coder
+
+		p
+			| Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+		input(type="email", name="email")
+
+		input(type="submit", value="Rent")
