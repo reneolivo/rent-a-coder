@@ -30,7 +30,7 @@ block content
 
 		p.price
 			span.currency USD$
-			span.number= coder.price
+			span.number= coder.price.toFixed(2)
 
 		input(type="email", name="email", placeholder="Your E-Mail")
 
