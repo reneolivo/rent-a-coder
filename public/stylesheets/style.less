@@ -1,18 +1,18 @@
-@import '../bower_components/bootstrap/less/bootstrap';
 @import './colours';
 
 body {
 	margin: 0;
 	padding: 0;
+	font-family: Helvetica;
 }
 
 #wrapper {
-	.row();
+	width: 990px;
 }
 
 #main-header {
-	.make-md-column( 3 );
-
+	float: left;
+	width: 300px;
 	padding-left: 30px;
 	color: white;
 	background: @dark-orange;
@@ -23,5 +23,20 @@ body {
 }
 
 #content {
-	.make-md-column( 9 );
+	float: left;
+	padding-left: 40px;
+	width: 500px;
+}
+
+.coder {
+	.figure {
+		width: 100px;
+		height: 100px;
+		border-radius: 100px;
+		overflow: hidden;
+
+		img {
+			width: 100px;
+		}
+	}
 }
