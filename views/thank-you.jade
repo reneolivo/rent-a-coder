@@ -13,8 +13,11 @@ block content
 
 	a(href="/") Continue
 
-	ul
-		each val, index in post
-			li
-				strong= index + ':'
-				span= val
+	.post-info
+		h3 Post Info:
+		
+		ul
+			each val, index in post
+				li
+					strong= index + ':'
+					span= val
