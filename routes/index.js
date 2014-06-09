@@ -1,6 +1,7 @@
 var db		= require( '../models/db' );
 var express	= require( 'express' );
 var router	= express.Router();
+var curl	= require( 'curlrequest' );
 
 var secrets	= require( '../data/secrets' );
 
@@ -48,9 +49,27 @@ router.post('/thank-you', thank_you);
 
 /* POST IPN */
 router.post('/payment-confirmation', function(req, res) {
-	db.insert( req.body );
+	//ENVIAR UN EMPTY STRING:
+	res.send(200, '');
 
-	res.send(200, '-ok-');
+	//VERIFY
+	var data	= req.body;
+	data.cmd	= '_notify-validate';
+
+	curl.request(
+		{
+			url		: 'https://www.sandbox.paypal.com/cgi-bin/webscr',
+			method	: 'post',
+			data	: data
+		},
+		function response(err, response, headers) {
+			db.insert({
+				err: err,
+				response: response,
+				headers: headers
+			});
+		}
+	);
 });
 
 
