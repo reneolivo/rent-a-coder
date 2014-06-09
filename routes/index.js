@@ -59,7 +59,7 @@ router.post('/payment-confirmation', function(req, res) {
 	curl.request(
 		{
 			url		: 'https://www.sandbox.paypal.com/cgi-bin/webscr',
-			method	: 'post',
+			method	: 'POST',
 			data	: data
 		},
 		function response(err, response, headers) {
