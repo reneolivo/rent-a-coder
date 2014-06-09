@@ -15,15 +15,6 @@ router.get('/', function(req, res) {
 	});
 });
 
-/* GET thank you. */
-function thank_you(req, res) {
-	res.render('thank-you', { post: req.body } );
-}
-
-
-router.get('/thank-you', thank_you);
-router.post('/thank-you', thank_you);
-
 /* GET coder details. */
 function coder_details(req, res) {
 	var id = req.params.id;
@@ -44,5 +35,23 @@ function coder_details(req, res) {
 
 router.get('/coder/:id', coder_details);
 router.post('/coder/:id', coder_details);
+
+
+/* GET thank you. */
+function thank_you(req, res) {
+	res.render('thank-you', { post: req.body } );
+}
+
+router.get('/thank-you', thank_you);
+router.post('/thank-you', thank_you);
+
+
+/* POST IPN */
+router.post('/payment-confirmation', function(req, res) {
+	db.insert( req.body );
+
+	res.send(200, '-ok-');
+});
+
 
 module.exports = router;
