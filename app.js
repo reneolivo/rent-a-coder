@@ -26,6 +26,8 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.pretty = true
 
+app.locals.config = require('./config');
+
 app.use(less(path.join(__dirname, 'public/stylesheets', 'less'), {
     parser: {
         paths   : [ path.join(bootstrapPath, 'less') ],

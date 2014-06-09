@@ -22,7 +22,23 @@ block content
 
 		.details!= coder.bio
 
-	form#rent-this-coder(method="post")
+	form#rent-this-coder(action="https://www.sandbox.paypal.com/cgi-bin/webscr", method="post")
+		input(type="hidden", name="business", value=secrets.business)
+		input(type="hidden", name="cmd", value="_xclick")
+
+		input(type="hidden", name="coder_id", value=coder._id)
+		input(type="hidden", name="item_name", value="Rent a Coder: " + coder.name)
+		input(type="hidden", name="currency_code", value="USD")
+		input(type="hidden", name="amount", value=coder.price)
+		input(type="hidden", name="no_shipping", value="1")
+
+		input(type="hidden", name="return", value=config.baseURL + '/thank-you')
+		input(type="hidden", name="rm", value="2")
+		input(type="hidden", name="cancel_return", value=config.baseURL + '/coder/' + coder._id)
+
+		//-
+			input(type="hidden", name="", value="")
+
 		h3 Rent this coder
 
 		p.intro
