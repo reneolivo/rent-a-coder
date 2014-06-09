@@ -26,7 +26,6 @@ block content
 		input(type="hidden", name="business", value=secrets.business)
 		input(type="hidden", name="cmd", value="_xclick")
 
-		input(type="hidden", name="coder_id", value=coder._id)
 		input(type="hidden", name="item_name", value="Rent a Coder: " + coder.name)
 		input(type="hidden", name="currency_code", value="USD")
 		input(type="hidden", name="amount", value=coder.price)
@@ -48,6 +47,7 @@ block content
 			span.currency USD$
 			span.number= coder.price.toFixed(2)
 
-		input(type="email", name="email", placeholder="Your E-Mail")
+		//-
+			input(type="email", name="email", placeholder="Your E-Mail")
 
 		input(type="submit", value="Rent")
