@@ -37,6 +37,25 @@ function coder_details(req, res) {
 router.get('/coder/:id', coder_details);
 router.post('/coder/:id', coder_details);
 
+/* GET cart. */
+function cart(req, res) {
+	var id = req.params.id;
+
+	db.find({}).limit(3).exec(function(err, doc) {
+		if (err) {
+			return res.send(500, err);
+		}
+
+		res.render('cart', {
+			coders	: doc,
+			secrets : secrets 
+		});
+	});
+}
+
+router.get('/cart', cart);
+router.post('/cart', cart);
+
 
 /* GET thank you. */
 function thank_you(req, res) {
