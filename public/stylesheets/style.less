@@ -190,14 +190,37 @@ body {
 	}
 
 	input[type="submit"] {
-		cursor: pointer;
+		.submit-button();
+
 		margin-left: 104px;
 		width: 80px;
-		color: white;
-		font-weight: bold;
-		font-size: larger;
-		text-transform: uppercase;
-		background: @dark-orange;
-		border: none;
 	}
+}
+
+#cart {
+	tr td.quantity input {
+		width: 40px;
+	}
+
+	tr td.fee {
+		.currency {
+			font-size: x-small;
+		}
+	}
+
+	input[type="submit"] {
+		.submit-button();
+		
+		float: right;
+	}
+}
+
+.submit-button() {
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+	font-size: larger;
+	text-transform: uppercase;
+	background: @dark-orange;
+	border: none;
 }

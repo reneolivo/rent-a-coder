@@ -9,47 +9,51 @@ block content
 		input(type="hidden", name="currency_code", value="USD")
 		input(type="hidden", name="upload", value=1)
 		
-		table#coders(cellpadding=3)
+		table#coders(cellpadding=3, width="100%")
 			thead
 				tr
 					th(colspan=2) Coder
 					th Rent Type
 					th Hours
+					th Base Fee
 
 			tbody
 				each coder, i in coders
 					tr.coder-info
-						td
+						td.image
 							img(width=50, src="/data/users/" + coder.imagePath, alt="Coder")
 
-						td= coder.name
+						td.name= coder.name
 
-						td
-
+						td.rent-type
 							select(name="os0_"+(i+1))
 								option(value="email") By Email
 								option(value="skype") By Skype
 								option(value="on-site") On Site
 
-						td
+						td.quantity
 							input(type="number", name="quantity_" + (i+1), value="1", size=2, min=1)
 
-						//required fields:
-						input(type="hidden", name="item_name_" + (i+1), value=coder.name)
-						input(type="hidden", name="amount_" + (i+1), value=coder.price)
+						td.fee
+							span.currency USD$
+							span.number= coder.price
 
-						//option values:
-						input(type="hidden", name="on0_"+(i+1), value="Rent Type")
+							//required fields:
+							input(type="hidden", name="item_name_" + (i+1), value=coder.name)
+							input(type="hidden", name="amount_" + (i+1), value=coder.price)
 
-						input(type="hidden", name="item_index_" + (i+1), value= (i+1))
-						input(type="hidden", name="option_index_" + (i+1), value= (i+1))
-						input(type="hidden", name="option_select0_" + (i+1), value="email")
-						input(type="hidden", name="option_amount0_" + (i+1), value=coder.price)
+							//option values:
+							input(type="hidden", name="on0_"+(i+1), value="Rent Type")
 
-						input(type="hidden", name="option_select1_" + (i+1), value="skype")
-						input(type="hidden", name="option_amount1_" + (i+1), value=coder.price * 2)
+							input(type="hidden", name="item_index_" + (i+1), value= (i+1))
+							input(type="hidden", name="option_index_" + (i+1), value= (i+1))
+							input(type="hidden", name="option_select0_" + (i+1), value="email")
+							input(type="hidden", name="option_amount0_" + (i+1), value=coder.price)
 
-						input(type="hidden", name="option_select2_" + (i+1), value="on-site")
-						input(type="hidden", name="option_amount2_" + (i+1), value=coder.price * 4)
+							input(type="hidden", name="option_select1_" + (i+1), value="skype")
+							input(type="hidden", name="option_amount1_" + (i+1), value=coder.price * 2)
+
+							input(type="hidden", name="option_select2_" + (i+1), value="on-site")
+							input(type="hidden", name="option_amount2_" + (i+1), value=coder.price * 4)
 
 		input(type="submit", value="Checkout")
