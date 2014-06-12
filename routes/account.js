@@ -70,14 +70,14 @@ router.post('/register', function(req, res) {
 				);
 			}
 
-			req.session.registeredUser = result;
+			req.session.registeredUser = result._id;
 
 			res.redirect( '/account/registered-successfully' );
 		});
 	}
 
 	function renderError(msg) {
-		return res.render( 'account/register', {
+		return res.render('account/register', {
 			error	: msg,
 			user	: {
 				firstName	: req.body.firstName,
@@ -91,14 +91,52 @@ router.post('/register', function(req, res) {
 
 
 router.get('/registered-successfully', function(req, res) {
-	res.render('account/registered-successfully', {
-		user	: req.session.registeredUser
-	});
+	Account.findById(
+		req.session.registeredUser,
+		function(err, result) {
+			if (err) {
+				console.error( err );
+
+				res.send(500);
+			} else if (result === null) {
+				res.redirect('/account/register');
+			} else {
+				res.render('account/registered-successfully', {
+					user	: result
+				});
+			}
+		}
+	);
+	
 });
 
 
 router.get('/login', function(req, res) {
 	res.render('account/login');
+});
+
+router.post('/login', function(req, res) {
+	Account.login(
+		req.body.email,
+		req.body.password,
+		function(err, result) {
+			if (err) {
+				console.error( err );
+
+				res.render('account/login', {
+					error	: 'There were internal errors, please try again'
+				});
+			} else if (result === null) {
+				res.render('account/login', {
+					error	: 'Wrong email/password'
+				});
+			} else {
+				req.session.user = result._id;
+
+				req.redirect( '/account' );
+			}
+		}
+	);
 });
 
 
