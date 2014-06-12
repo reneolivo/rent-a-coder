@@ -8,8 +8,12 @@ function Account() {
 
 }
 
-Account.prototype.getByEmail	= function getByEmail(email, callback) {
+Account.prototype.findByEmail	= function findByEmail(email, callback) {
 	db.findOne( { email : email }, callback );
+}
+
+Account.prototype.findById = function findById(id, callback) {
+	db.findOne( { _id : id }, callback );
 }
 
 Account.prototype.create = function create(userData, callback) {
@@ -66,7 +70,19 @@ Account.prototype._registerUserOnAuthorize = function _registerUserOnAuthorize(d
 }
 
 Account.prototype.update = function update(docId, properties, callback) {
-	db.update( { _id : docId }, { $set : properties }, callback );
+	var self = this;
+	
+	db.update({ _id : docId }, { $set : properties }, function(err, numUpdated) {
+		if (err) {
+			if (_.isFunction( callback )) {
+				callback( err, null );
+			}
+
+			return;
+		}
+
+		self.findById( docId, callback );
+	});
 }
 
 Account.prototype.remove = function remove(docId, callback) {
