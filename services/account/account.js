@@ -1,9 +1,13 @@
-var db	= require( '../models/db' )( 'accounts' );
+var db	= require( '../../models/db' )( 'accounts' );
 var CH 	= require( '../helpers/CryptoHelper' );
 var _	= require( 'lodash' );
 
 function Account() {
 
+}
+
+Account.prototype.getByEmail	= function getByEmail(email, callback) {
+	db.findOne( { email : email }, callback );
 }
 
 Account.prototype.create = function create(userData, callback) {
@@ -49,7 +53,7 @@ Account.prototype.create = function create(userData, callback) {
 	});
 }
 
-Account.prototype._registerUserOnAuthorize = _registerUserOnAuthorize(doc, callback) {
+Account.prototype._registerUserOnAuthorize = function _registerUserOnAuthorize(doc, callback) {
 	auth.createCustomerProfile({
 			merchantCustomerId	: doc._id,
 			email				: doc.email,

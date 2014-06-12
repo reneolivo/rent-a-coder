@@ -4,7 +4,9 @@ var router		= express.Router();
 var authorize	= require( '../services/authorize-net/authorize-net' );
 var secrets		= require( '../data/secrets' );
 
+var Account		= require( '../services/account/account' );
 var _			= require( 'lodash' );
+
 
 
 router.get('/register', function(req, res) {
@@ -48,7 +50,7 @@ router.post('/register', function(req, res) {
 		return renderError( "The Password length must be between 8 and 32 characters" );
 	}
 
-	db.findOne({ email : req.body.email }, function(err, doc) {
+	Account.getByEmail( req.body.email, function(err, doc) {
 		if (err) {
 			return renderError( 'Internal error.' );
 		} else if (doc !== null) {
