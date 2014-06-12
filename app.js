@@ -12,6 +12,7 @@ var accountRoutes   = require('./routes/account');
 
 var app             = express();
 
+var Account         = require('./services/account/account');
 var secrets         = require('./data/secrets');
 
 var bootstrapPath   = path.join(__dirname, 'public', 'bower_components', 'bootstrap');
@@ -41,6 +42,22 @@ app.use(less(path.join(__dirname, 'public/stylesheets', 'less'), {
     prefix  : '/stylesheets',
     debug   : true
 }));
+
+app.use('*', function(req, res, next) {
+    if (typeof req.session.user === 'undefined' || req.session.user === null) {
+        return next();
+    }
+
+    Account.findById(req.session.user, function(err, doc) {
+        if (err) {
+            return console.error( err );
+        }
+
+        req.user = doc;
+
+        next();
+    });
+});
 
 app.use('/', routes);
 app.use('/account', accountRoutes);

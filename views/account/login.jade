@@ -3,6 +3,9 @@ extends ../layout
 block content
 	h2 Account Login
 
+	if error
+		p.error!= error
+
 	form(method="post")
 		fieldset
 			.input
@@ -14,4 +17,3 @@ block content
 				input(type="password", name="password")
 
 		input(type="submit", value="Login")
-		

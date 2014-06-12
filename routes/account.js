@@ -8,6 +8,16 @@ var Account		= require( '../services/account/account' );
 var _			= require( 'lodash' );
 
 
+router.get('/', function(req, res) {
+	if (_.isUndefined( req.user ) || req.user === null) {
+		return res.redirect( '/account/login' );
+	}
+
+	res.render('account/index', {
+		user	: req.user
+	});
+});
+
 
 router.get('/register', function(req, res) {
 	res.render('account/register', {
@@ -131,9 +141,11 @@ router.post('/login', function(req, res) {
 					error	: 'Wrong email/password'
 				});
 			} else {
+				//NOTE: ideally an access token should be generated.
+				
 				req.session.user = result._id;
 
-				req.redirect( '/account' );
+				res.redirect( '/account' );
 			}
 		}
 	);

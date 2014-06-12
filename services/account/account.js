@@ -69,9 +69,29 @@ Account.prototype._registerUserOnAuthorize = function _registerUserOnAuthorize(d
 	authorize.createCustomerProfile(data, callback);
 }
 
+Account.prototype.login = function(email, password, callback) {
+	if (!_.isFunction( callback )) {
+		return;
+	}
+
+	this.findByEmail(email, function(err, doc) {
+		if (err) {
+			return callback( err, null );
+		}
+
+		var hash = CH.hash( password, doc.salt );
+
+		if (hash === doc.password) {
+			callback( null, doc );
+		} else {
+			callback( null, null );
+		}
+	});
+}
+
 Account.prototype.update = function update(docId, properties, callback) {
 	var self = this;
-	
+
 	db.update({ _id : docId }, { $set : properties }, function(err, numUpdated) {
 		if (err) {
 			if (_.isFunction( callback )) {
