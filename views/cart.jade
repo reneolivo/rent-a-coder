@@ -45,15 +45,16 @@ block content
 							//option values:
 							input(type="hidden", name="on0_"+(i+1), value="Rent Type")
 
-							input(type="hidden", name="item_index_" + (i+1), value= (i+1))
-							input(type="hidden", name="option_index_" + (i+1), value= (i+1))
-							input(type="hidden", name="option_select0_" + (i+1), value="email")
-							input(type="hidden", name="option_amount0_" + (i+1), value=coder.price)
+							//-
+								//this won't work with a custom cart:
+								
+								input(type="hidden", name="option_select0_" + (i+1), value="email")
+								input(type="hidden", name="option_amount0_" + (i+1), value=coder.price)
 
-							input(type="hidden", name="option_select1_" + (i+1), value="skype")
-							input(type="hidden", name="option_amount1_" + (i+1), value=coder.price * 2)
+								input(type="hidden", name="option_select1_" + (i+1), value="skype")
+								input(type="hidden", name="option_amount1_" + (i+1), value=coder.price * 2)
 
-							input(type="hidden", name="option_select2_" + (i+1), value="on-site")
-							input(type="hidden", name="option_amount2_" + (i+1), value=coder.price * 4)
+								input(type="hidden", name="option_select2_" + (i+1), value="on-site")
+								input(type="hidden", name="option_amount2_" + (i+1), value=coder.price * 4)
 
 		input(type="submit", value="Checkout")
