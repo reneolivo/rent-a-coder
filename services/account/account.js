@@ -1,6 +1,8 @@
-var db	= require( '../../models/db' )( 'accounts' );
-var CH 	= require( '../helpers/CryptoHelper' );
-var _	= require( 'lodash' );
+var db			= require( '../../models/db' )( 'accounts' );
+var CH 			= require( '../helpers/CryptoHelper' );
+var _			= require( 'lodash' );
+var secrets		= require( '../../data/secrets' );
+var authorize	= require( '../authorize-net/authorize-net' );
 
 function Account() {
 
@@ -14,15 +16,15 @@ Account.prototype.create = function create(userData, callback) {
 	var self	= this;
 
 	var salt	= CH.generateSalt( secrets.authorize.loginId );
-	var pass	= CH.hash( req.body.password1, salt );
+	var pass	= CH.hash( userData.password1, salt );
 
-	var user = {
+	var user	= {
 		authorizeId	: null,
-		firstName	: req.body.firstName,
-		lastName	: req.body.lastName,
-		email		: req.body.email,
+		firstName	: userData.firstName,
+		lastName	: userData.lastName,
+		email		: userData.email,
 		salt		: salt,
-		password	: password
+		password	: pass
 	};
 
 	db.insert( user, function(err, doc) {
@@ -35,7 +37,7 @@ Account.prototype.create = function create(userData, callback) {
 		}
 
 		self._registerUserOnAuthorize(doc, function(authError, result) {
-			if (err) {
+			if (authError) {
 				return self.remove( doc._id, function(err) {
 					if (_.isFunction( callback )) {
 						callback( authError, null );
@@ -54,15 +56,17 @@ Account.prototype.create = function create(userData, callback) {
 }
 
 Account.prototype._registerUserOnAuthorize = function _registerUserOnAuthorize(doc, callback) {
-	auth.createCustomerProfile({
-			merchantCustomerId	: doc._id,
-			email				: doc.email,
-			description			: doc.firstName + ' ' + doc.lastName
-	}, callback);
+	var data = {
+		merchantCustomerId	: doc._id,
+		email				: doc.email,
+		description			: encodeURIComponent( doc.firstName + ' ' + doc.lastName )
+	};
+
+	authorize.createCustomerProfile(data, callback);
 }
 
 Account.prototype.update = function update(docId, properties, callback) {
-	db.update( { _id : docId }, properties, callback );
+	db.update( { _id : docId }, { $set : properties }, callback );
 }
 
 Account.prototype.remove = function remove(docId, callback) {

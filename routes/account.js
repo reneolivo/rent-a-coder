@@ -63,6 +63,8 @@ router.post('/register', function(req, res) {
 	function registerUser() {
 		Account.create( req.body, function(err, result) {
 			if (err) {
+				console.error( err.ErrorResponse );
+
 				return renderError(
 					"We couldn't create your account due to some internal errors. Please try again."
 				);
