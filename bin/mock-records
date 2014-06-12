@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var async		= require( 'async' );
-var db			= require( '../models/db' );
+var coders		= require( '../models/db' )( 'rent-a-coder' );
+var accounts	= require( '../models/db' )( 'accounts' );
 
 var records		= require( '../data/mock-data' );
 
@@ -11,13 +12,20 @@ var toProcess	= [];
 for(var i in records) {
 	toProcess.push((function(record) {
 		return function(asyncCallback) {
-			db.insert( record, asyncCallback );
+			coders.insert( record, asyncCallback );
 		}
 	})( records[ i ] ));
 }
 
 //DELETES all records
-db.remove({}, { multi: true }, function(err) {
+async.waterfall([
+	function(next) {
+		accounts.remove( {}, { multi: true }, next );
+	},
+	function(removed, next) {
+		coders.remove({}, { multi: true }, next);
+	}
+], function(err, result) {
 	if (err) {
 		return console.error( err );
 	}

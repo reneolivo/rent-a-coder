@@ -1,6 +1,11 @@
 var DataStore	= require( 'nedb' );
 var config		= require( '../config' );
+var path		= require( 'path' );
 
-var db			= new DataStore( { filename: config.DBPATH, autoload: true } );
+function prepareDB(dbName) {
+	var dbPath		= path.join( config.DBPATH, dbName + '.db' );
 
-module.exports	= db;
+	return new DataStore( { filename: dbPath, autoload: true } );
+}
+
+module.exports	= prepareDB;

@@ -1,4 +1,4 @@
-var db		= require( '../models/db' );
+var db		= require( '../models/db' )( 'rent-a-coder' );
 var express	= require( 'express' );
 var router	= express.Router();
 var curl	= require( 'curlrequest' );

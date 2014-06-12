@@ -12,16 +12,16 @@ router.get('/register', function(req, res) {
 
 
 router.post('/register', function(req, res) {
-	var requiredFields = [
+	var requiredFields = {
 		'firstName'	: 'First Name',
 		'lastName'	: 'Last Name',
 		'email'		: 'Email',
 		'password1'	: 'Password',
 		'password2'	: 'Repeat Password'
-	];
+	};
 
 	for(var i in requiredFields) {
-		if (typeof req.body[ i ] === 'undefined' || _.isEmpty( req.body[ i ]))) {
+		if (typeof req.body[ i ] === 'undefined' || _.isEmpty( req.body[ i ])) {
 			return renderError( 'Field <b>' + requiredFields[ i ] + '</b> can\'t be empty.');
 		}
 	}

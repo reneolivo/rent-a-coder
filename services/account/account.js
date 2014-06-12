@@ -1,3 +1,4 @@
+var db = require( '../models/db' )( 'accounts' );
 var CH = require( '../helpers/CryptoHelper' );
 
 function Account() {
