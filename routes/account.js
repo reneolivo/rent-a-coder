@@ -50,7 +50,7 @@ router.post('/register', function(req, res) {
 		return renderError( "The Password length must be between 8 and 32 characters" );
 	}
 
-	Account.getByEmail( req.body.email, function(err, doc) {
+	Account.findByEmail( req.body.email, function(err, doc) {
 		if (err) {
 			return renderError( 'Internal error.' );
 		} else if (doc !== null) {
@@ -72,7 +72,7 @@ router.post('/register', function(req, res) {
 
 			req.session.registeredUser = result;
 
-			res.redirect( '/registerd-successfully' );
+			res.redirect( '/account/registered-successfully' );
 		});
 	}
 
@@ -87,5 +87,20 @@ router.post('/register', function(req, res) {
 		});
 	}
 });
+
+
+
+router.get('/registered-successfully', function(req, res) {
+	res.render('account/registered-successfully', {
+		user	: req.session.registeredUser
+	});
+});
+
+
+router.get('/login', function(req, res) {
+	res.render('account/login');
+});
+
+
 
 module.exports = router;

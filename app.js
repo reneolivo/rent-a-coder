@@ -3,6 +3,7 @@ var path            = require('path');
 //var favicon         = require('static-favicon');
 var logger          = require('morgan');
 var cookieParser    = require('cookie-parser');
+var cookieSession   = require('cookie-session')
 var bodyParser      = require('body-parser');
 var less            = require('less-middleware');
 
@@ -10,6 +11,8 @@ var routes          = require('./routes/index');
 var accountRoutes   = require('./routes/account');
 
 var app             = express();
+
+var secrets         = require('./data/secrets');
 
 var bootstrapPath   = path.join(__dirname, 'public', 'bower_components', 'bootstrap');
 
@@ -23,6 +26,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(cookieSession( { secret: secrets.sessionSecret } ));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.pretty = true

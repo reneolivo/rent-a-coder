@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+	h2 Congratulations!
+
+	p
+		span= user.firstName
+		, you have registered successfully.
+
+	p Please login using the following link:
+	a(href="/account/login") Account Login
