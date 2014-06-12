@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+	h2 Register
+
+	form
+		fieldset
+			legend Basic Information
+
+			.input
+				label
+					strong First Name:
+					input(type="text", name="firstName")
+
+			.input
+				label
+					strong Last Name:
+					input(type="text", name="lastName")
+
+
+		fieldset
+			legend Login Information
+
+			.input
+				label
+					strong Email:
+					input(type="email", name="email")
+
+			.input
+				label
+					strong Password:
+					input(type="password", name="password1")
+
+			.input
+				label
+					strong Repeat Password:
+					input(type="password", name="password2")
+
+
+		input(type="submit", value="Register")
