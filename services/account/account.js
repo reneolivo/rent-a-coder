@@ -1,5 +1,6 @@
-var db = require( '../models/db' )( 'accounts' );
-var CH = require( '../helpers/CryptoHelper' );
+var db	= require( '../models/db' )( 'accounts' );
+var CH 	= require( '../helpers/CryptoHelper' );
+var _	= require( 'lodash' );
 
 function Account() {
 

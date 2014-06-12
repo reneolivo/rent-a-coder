@@ -4,9 +4,17 @@ var router		= express.Router();
 var authorize	= require( '../services/authorize-net/authorize-net' );
 var secrets		= require( '../data/secrets' );
 
+var _			= require( 'lodash' );
+
 
 router.get('/register', function(req, res) {
-	res.render( 'account/register' );
+	res.render('account/register', {
+		user	: {
+			firstName	: '',
+			lastName	: '',
+			email		: ''
+		}
+	});
 });
 
 
@@ -32,7 +40,7 @@ router.post('/register', function(req, res) {
 		return renderError( "Please provide a valid email address" );
 	}
 
-	if (req.body.password1 !== req.body.passwrd2) {
+	if (req.body.password1 !== req.body.password2) {
 		return renderError( "Passwords don't match." );
 	}
 
@@ -66,7 +74,12 @@ router.post('/register', function(req, res) {
 
 	function renderError(msg) {
 		return res.render( 'account/register', {
-			error: msg
+			error	: msg,
+			user	: {
+				firstName	: req.body.firstName,
+				lastName	: req.body.lastName,
+				email		: req.body.email
+			}
 		});
 	}
 });

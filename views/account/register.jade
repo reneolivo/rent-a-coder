@@ -3,19 +3,22 @@ extends ../layout
 block content
 	h2 Register
 
-	form
+	if error
+		p.error!= error
+
+	form(method="post")
 		fieldset
 			legend Basic Information
 
 			.input
 				label
 					strong First Name:
-					input(type="text", name="firstName")
+					input(type="text", name="firstName", value=user.firstName)
 
 			.input
 				label
 					strong Last Name:
-					input(type="text", name="lastName")
+					input(type="text", name="lastName", value=user.lastName)
 
 
 		fieldset
@@ -24,7 +27,7 @@ block content
 			.input
 				label
 					strong Email:
-					input(type="email", name="email")
+					input(type="email", name="email", value=user.email)
 
 			.input
 				label
