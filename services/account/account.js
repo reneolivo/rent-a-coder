@@ -28,7 +28,8 @@ Account.prototype.create = function create(userData, callback) {
 		lastName	: userData.lastName,
 		email		: userData.email,
 		salt		: salt,
-		password	: pass
+		password	: pass,
+		creditCards	: []
 	};
 
 	db.insert( user, function(err, doc) {

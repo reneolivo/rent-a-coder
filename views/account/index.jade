@@ -3,4 +3,67 @@ extends ../layout
 block content
 	h2 Account
 
-	p=user.firstName
+	h3=user.firstName + ' ' + user.lastName
+
+	#credit-cards
+		#credit-cards-list
+			h4 Credit Cards
+
+			table
+				thead
+					th #
+					th Provider
+					th Number
+					th Expires
+					th 
+
+				tbody
+					if user.creditCards && user.creditCards.length
+						each card, i in user.creditCards
+							tr.card
+								th= i
+								td= card.provider
+								td= card.number
+								td= card.expirationDate
+								td
+									a(href="/account/card/remove/" + card._id)
+										Remove
+
+		form#create-new-credit-card(action="/account/card/add", method="post")
+			h4 Add New Credit Card
+
+			.input
+				label
+					strong Card Number
+					input(type="text", name="number")
+
+			.input
+				label
+					strong Expiration Date
+
+				select(name="expMonth")
+					option(value=1) Jan
+					option(value=2) Feb
+					option(value=3) Mar
+					option(value=4) Apr
+					option(value=5) May
+					option(value=6) Jun
+					option(value=7) Jul
+					option(value=8) Aug
+					option(value=9) Sep
+					option(value=10) Oct
+					option(value=11) Nov
+					option(value=12) Dec
+
+				select(name="expYear")
+					option 2014
+					option 2015
+					option 2016
+					option 2017
+					option 2018
+
+			.input
+				label
+					strong Code
+					input(type="text", name="code", size=3)
+
