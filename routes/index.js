@@ -5,6 +5,8 @@ var curl	= require( 'curlrequest' );
 
 var secrets	= require( '../data/secrets' );
 
+var Trans	= require( '../services/account/transactions' );
+
 /* GET home page. */
 router.get('/', function(req, res) {
 	db.find({}, function(err, docs) {
@@ -38,7 +40,9 @@ router.get('/coder/:id', coder_details);
 router.post('/coder/:id', coder_details);
 
 /* GET cart. */
-function cart(req, res) {
+
+
+router.get('/cart', function cart(req, res) {
 	var id = req.params.id;
 
 	db.find({}).limit(3).exec(function(err, doc) {
@@ -48,13 +52,58 @@ function cart(req, res) {
 
 		res.render('cart', {
 			coders	: doc,
-			secrets : secrets 
+			secrets : secrets,
+			user	: req.user
 		});
 	});
-}
+});
 
-router.get('/cart', cart);
-router.post('/cart', cart);
+router.post('/cart', function cart(req, res) {
+	if (typeof req.user === 'undefined' || req.user === null) {
+		res.redirect( '/account/login' );
+	}
+
+	db.find({ _id : { $in : req.body.item_id } }, function(err, result) {
+		if (err) {
+			res.send(500);
+		}
+
+		//We'll just assume the cart was not empty, etc.
+		var amountToCharge = 0;
+
+		for(var i in result) {
+			var index		= req.body.item_id.indexOf( result[ i ]._id );
+			var quantity	= req.body.quantity[ index ];
+			var amount		= result[ i ].price * quantity;
+
+			amountToCharge	+= amount;
+		}
+
+		Trans.create(
+			req.user.authorizeId,
+			req.body.card,
+			amountToCharge,
+			function(err, result) {
+				if (err) {
+					if (err.ErrorResponse) {
+						console.error( err.ErrorResponse.messages );
+					} else {
+						console.error( err );
+					}
+
+					res.send(
+						500, 
+						'Something wrong went with the transaction. Please try again'
+					);
+
+					return;
+				}
+
+				res.redirect( '/thank-you' );
+			}
+		);
+	});
+});
 
 
 /* GET thank you. */

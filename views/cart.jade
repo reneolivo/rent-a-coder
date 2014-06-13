@@ -3,7 +3,7 @@ extend layout
 block content
 	h2 Cart
 
-	form#cart(action="https://www.sandbox.paypal.com/cgi-bin/webscr", method="post")
+	form#cart(method="post")
 		input(type="hidden", name="business", value=secrets.business)
 		input(type="hidden", name="cmd", value="_cart")
 		input(type="hidden", name="currency_code", value="USD")
@@ -32,29 +32,40 @@ block content
 								option(value="on-site") On Site
 
 						td.quantity
-							input(type="number", name="quantity_" + (i+1), value="1", size=2, min=1)
+							input(type="hidden", name="item_id[]", value=coder._id)
+							input(type="number", name="quantity[]", value="1", size=2, min=1)
 
 						td.fee
 							span.currency USD$
 							span.number= coder.price
 
-							//required fields:
-							input(type="hidden", name="item_name_" + (i+1), value=coder.name)
-							input(type="hidden", name="amount_" + (i+1), value=coder.price)
 
-							//option values:
-							input(type="hidden", name="on0_"+(i+1), value="Rent Type")
+		hr
 
-							//-
-								//this won't work with a custom cart:
-								
-								input(type="hidden", name="option_select0_" + (i+1), value="email")
-								input(type="hidden", name="option_amount0_" + (i+1), value=coder.price)
+		if user
+			if user.creditCards && user.creditCards && user.creditCards.length > 0
+				h4 Use Credit Card:
 
-								input(type="hidden", name="option_select1_" + (i+1), value="skype")
-								input(type="hidden", name="option_amount1_" + (i+1), value=coder.price * 2)
+				.credit-cards
+				each card, i in user.creditCards
+					.card
+						label
+							input(type="radio", name="card", value=card.authorizeId, checked= i == 0)
 
-								input(type="hidden", name="option_select2_" + (i+1), value="on-site")
-								input(type="hidden", name="option_amount2_" + (i+1), value=coder.price * 4)
+							span= card.cardNumber
+							span  - 
+							span= card.expirationDate
 
-		input(type="submit", value="Checkout")
+				hr
+
+				input(type="submit", value="Checkout")
+			else
+				p
+					| Please add at least one 
+					a(href="/account") Credit Card
+					|  to your account
+		else
+			p
+				| Please 
+				a(href="/account/login") Login
+				|  to continue with the checkout process

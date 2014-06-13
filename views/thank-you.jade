@@ -1,23 +1,11 @@
 extends layout
 
 block content
-
-	h1= "Thank You " + post.first_name + ' ' + post.last_name
+	h2 Thank you!
 
 	p
-		| Your purchase for 
-		strong= post.item_name
-		|  has been successful.
-
-	p Please check your email for further instructions.
+		| Your purchase has been carried out successfully.
+		br
+		| Please check your email for further instructions.
 
 	a(href="/") Continue
-
-	.post-info
-		h3 Post Info:
-		
-		ul
-			each val, index in post
-				li
-					strong= index + ':'
-					span= val
