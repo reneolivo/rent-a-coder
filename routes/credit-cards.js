@@ -1,42 +1,41 @@
 var express = require( 'express' );
-var route	= express.Router();
+var router	= express.Router();
 var _		= require( 'lodash' );
+var Card	= require( '../services/account/credit-cards' );
 
-router.post('create', function(req, res) {
+router.post('/add', function(req, res) {
 	if (_.isUndefined( req.user ) || _.isEmpty( req.user )) {
 		res.redirect( '/account/login' );
 	}
 
-	var date		= new Date( req.body.expirationDate );
-	var dateString	= date.getFullYear();
-	var month		= date.getMonth() + 1;
-
-	if (month <= 9) {
-		month = '0' + month;
-	}
-
-	dateString		= dateString + '-' + month;
-
 	var cardData = {
 		cardNumber		: req.body.number,
-		expirationDate	: dateString,
+		expirationDate	: req.body.expYear + '-' + req.body.expMonth,
 		cardCode		: req.body.code
 	};
 
 	Card.create(
-		req.user.authorizeId,
+		req.user,
 		cardData,
 		function(err, result) {
 			if (err) {
-				console.error( err );
+				if (err.ErrorResponse) {
+					console.error( err.ErrorResponse.messages );
+				} else {
+					console.error( err );
+				}
 
-				return res.send(
+				res.send(
 					500, 
 					'There was an error processing the credit card. Please try again'
 				);
+
+				return;
 			}
 
 			res.redirect( '/account?card-creted' );
 		}
 	);
 });
+
+module.exports = router;

@@ -70,6 +70,15 @@ Account.prototype._registerUserOnAuthorize = function _registerUserOnAuthorize(d
 	authorize.createCustomerProfile(data, callback);
 }
 
+Account.prototype.addCreditCard = function addCreditCard(userId, creditCardAuthId, creditCardData, callback) {
+	creditCardData.authorizeId = creditCardAuthId;
+
+	creditCardData.cardNumber	= ( creditCardData.cardNumber + '' ).replace( /.(?=[1-9]{4})/g, 'X' );
+	creditCardData.cardCode		= ( creditCardData.cardCode + '' ).replace( /./g, 'X' );
+
+	db.update( { _id : userId }, { $push : { creditCards : creditCardData } }, callback );
+}
+
 Account.prototype.login = function(email, password, callback) {
 	if (!_.isFunction( callback )) {
 		return;

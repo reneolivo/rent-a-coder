@@ -8,6 +8,9 @@ var Account		= require( '../services/account/account' );
 var _			= require( 'lodash' );
 
 
+var cardsRoutes  = require('./credit-cards');
+
+
 router.get('/', function(req, res) {
 	if (_.isUndefined( req.user ) || req.user === null) {
 		return res.redirect( '/account/login' );
@@ -151,6 +154,9 @@ router.post('/login', function(req, res) {
 	);
 });
 
+
+
+router.use('/credit-cards', cardsRoutes);
 
 
 module.exports = router;

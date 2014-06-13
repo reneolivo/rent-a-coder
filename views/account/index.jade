@@ -22,14 +22,13 @@ block content
 						each card, i in user.creditCards
 							tr.card
 								th= i
-								td= card.provider
-								td= card.number
+								td= card.cardNumber
 								td= card.expirationDate
 								td
 									a(href="/account/card/remove/" + card._id)
 										Remove
 
-		form#create-new-credit-card(action="/account/card/add", method="post")
+		form#create-new-credit-card(action="/account/credit-cards/add", method="post")
 			h4 Add New Credit Card
 
 			.input
@@ -42,18 +41,18 @@ block content
 					strong Expiration Date
 
 				select(name="expMonth")
-					option(value=1) Jan
-					option(value=2) Feb
-					option(value=3) Mar
-					option(value=4) Apr
-					option(value=5) May
-					option(value=6) Jun
-					option(value=7) Jul
-					option(value=8) Aug
-					option(value=9) Sep
-					option(value=10) Oct
-					option(value=11) Nov
-					option(value=12) Dec
+					option(value='01') Jan
+					option(value='02') Feb
+					option(value='03') Mar
+					option(value='04') Apr
+					option(value='05') May
+					option(value='06') Jun
+					option(value='07') Jul
+					option(value='08') Aug
+					option(value='09') Sep
+					option(value='10') Oct
+					option(value='11') Nov
+					option(value='12') Dec
 
 				select(name="expYear")
 					option 2014
@@ -66,4 +65,6 @@ block content
 				label
 					strong Code
 					input(type="text", name="code", size=3)
+
+			input(type="submit", value="Add to Account")
 
