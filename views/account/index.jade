@@ -12,7 +12,6 @@ block content
 			table
 				thead
 					th #
-					th Provider
 					th Number
 					th Expires
 					th 
@@ -21,12 +20,12 @@ block content
 					if user.creditCards && user.creditCards.length
 						each card, i in user.creditCards
 							tr.card
-								th= i
+								th= i + 1
 								td= card.cardNumber
 								td= card.expirationDate
 								td
-									a(href="/account/card/remove/" + card._id)
-										Remove
+									a(href="/account/card/remove/" + card.authorizeId)
+										| Remove
 
 		form#create-new-credit-card(action="/account/credit-cards/add", method="post")
 			h4 Add New Credit Card
