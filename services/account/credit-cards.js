@@ -1,5 +1,5 @@
 var _			= require( 'lodash' );
-var Authorize = require('auth-net-types')
+var Authorize	= require( 'auth-net-types' );
 var auth		= require( '../authorize-net/authorize-net' );
 var Account		= require( './account' );
 
