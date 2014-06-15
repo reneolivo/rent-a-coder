@@ -3,6 +3,12 @@
 A demo for diffeerent electronic payment methods.
 
 
+## Presentation
+
+Missed the tech talk? have a look at the presentations slides @
+[ Slide Share ]( http://www.slideshare.net/reneolivo/pagos-electrnicos-35878141 )
+
+
 ### Requirements
 
 - NodeJS v0.10+
